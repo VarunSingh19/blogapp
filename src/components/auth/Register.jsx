@@ -20,6 +20,11 @@ export default function Register() {
     }
   };
   return (
+    <>
+      <br />
+      <br />
+      <br />
+      
     <div className="border p-3 bg-light " style={{ marginTop: 70 }}>
       <h1>Register</h1>
       <div className="form-group">
@@ -31,7 +36,7 @@ export default function Register() {
           onChange={(e) => {
             setName(e.target.value);
           }}
-        />
+          />
       </div>
       <div className="form-group">
         <label>Email</label>
@@ -54,12 +59,13 @@ export default function Register() {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
-        />
+          />
       </div>
       <br />
       <button className="btn btn-primary" onClick={handleSignup}>
         Register
       </button>
     </div>
+          </>
   );
 }

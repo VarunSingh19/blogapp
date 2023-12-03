@@ -82,65 +82,100 @@ export default function AddArticle() {
   };
 
   return (
-    <div className="border p-3 mt-3 bg-light" style={{ position: "fixed" }}>
+    <>
+      <br />
+      <br />
+      <br />
+      <br />
+      
+    <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
+    <div className="card p-4" style={{ maxWidth: "500px" }}>
       {!user ? (
         <>
-          <h2>
-            <Link to="/signin">Login to create article</Link>
-          </h2>
-          Don't have an account? <Link to="/register">Signup</Link>
+          <h2 className="mb-4">Login to Create an Article</h2>
+          <Link to="/signin" className="btn btn-primary mb-3">
+            Sign In
+          </Link>
+          <p className="text-muted">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-primary">
+              Sign Up
+            </Link>
+          </p>
         </>
       ) : (
         <>
-          <h2>Create article</h2>
-          <div className="form-group">
-            <label htmlFor="">Title</label>
+          <h2 className="mb-4">Create Article</h2>
+          <div className="mb-3">
+            <label htmlFor="title" className="form-label">
+              Title
+            </label>
             <input
               type="text"
               name="title"
+              id="title"
               className="form-control"
               value={formData.title}
               onChange={(e) => handleChange(e)}
             />
           </div>
-
-          {/* description */}
-          <label htmlFor="">Description</label>
-          <textarea
-            name="description"
-            className="form-control"
-            value={formData.description}
-            onChange={(e) => handleChange(e)}
-          />
-
-          {/* image */}
-          <label htmlFor="">Image</label>
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            className="form-control"
-            onChange={(e) => handleImageChange(e)}
-          />
-
-          {progress === 0 ? null : (
-            <div className="progress">
-              <div
-                className="progress-bar progress-bar-striped mt-2"
-                style={{ width: `${progress}%` }}
-              >
-                {`uploading image ${progress}%`}
+  
+          {/* Description */}
+          <div className="mb-3">
+            <label htmlFor="description" className="form-label">
+              Description
+            </label>
+            <textarea
+              name="description"
+              id="description"
+              className="form-control"
+              value={formData.description}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+  
+          {/* Image */}
+          <div className="mb-3">
+            <label htmlFor="image" className="form-label">
+              Image
+            </label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              accept="image/*"
+              className="form-control"
+              onChange={(e) => handleImageChange(e)}
+              />
+          </div>
+  
+          {progress > 0 && (
+            <div className="mb-3">
+              <div className="progress">
+                <div
+                  className="progress-bar progress-bar-striped"
+                  style={{ width: `${progress}%` }}
+                >
+                  {`Uploading Image: ${progress}%`}
+                </div>
               </div>
             </div>
           )}
+  
           <button
-            className="form-control btn-primary mt-2"
+            className="btn btn-primary"
             onClick={handlePublish}
-          >
-            Publish
+            disabled={progress > 0}
+            >
+            {progress > 0 ? "Publishing..." : "Publish"}
           </button>
         </>
       )}
     </div>
+  </div>
+  
+
+            </>
+
   );
 }

@@ -18,6 +18,12 @@ export default function Login() {
     }
   };
   return (
+    <>
+      <br />
+      <br />
+      <br />
+      <br />
+  
     <div className="border p-3 bg-light mx-auto"
     style={{maxWidth:400, marginTop:60}}
     >
@@ -31,7 +37,7 @@ export default function Login() {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
-        />
+          />
       </div>
 
       <div className="form-group">
@@ -50,5 +56,6 @@ export default function Login() {
         Login
       </button>
     </div>
+          </>
   );
 }

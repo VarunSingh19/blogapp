@@ -22,68 +22,59 @@ export default function Articles() {
     });
   }, []);
   return (
-    <div className="container">
-  {articles.length === 0 ? (
-    <p>No articles found!</p>
-  ) : (
-    articles.map(
-      ({
-        id,
-        title,
-        description,
-        imageUrl,
-        createdAt,
-        createdBy,
-        userId,
-        likes,
-        comments,
-      }) => (
-        <div className="border mt-3 p-3 bg-light" key={id}>
-          <div className="row">
-            <div className="col-md-3 col-12 mb-3">
-              <Link to={`/article/${id}`}>
-                <img
-                  src={imageUrl}
-                  alt="title"
-                  className="img-fluid"
-                />
-              </Link>
-            </div>
-            <div className="col-md-9 col-12">
-              <div className="row">
-                <div className="col-6">
-                  {createdBy && (
-                    <span className="badge bg-primary">{createdBy}</span>
-                  )}
-                </div>
-                <div className="col-6 d-flex flex-row-reverse">
-                  {user && user.uid === userId && (
-                    <DeleteArticle id={id} imageUrl={imageUrl} />
-                  )}
-                </div>
+    <div className="container mt-5">
+      
+      <br />
+      <br />
+      <br />
+      <br />
+      
+    {articles.map(({ id, imageUrl, createdBy, userId, title, createdAt, description, likes, comments }) => (
+      <div className="border p-4 mb-4 bg-light" key={id}>
+        <div className="row">
+          <div className="col-md-3 col-12 mb-3 mx-auto text-center">
+            <Link to={`/article/${id}`}>
+              <img
+                src={imageUrl}
+                alt="Article Cover"
+                className="img-fluid rounded"
+                style={{ maxWidth: '300px', maxHeight: '300px' }}
+              />
+            </Link>
+          </div>
+          <div className="col-md-9 col-12">
+            <div className="row mb-3">
+              <div className="col-6">
+                {createdBy && (
+                  <span className="badge bg-primary">{createdBy}</span>
+                )}
               </div>
-              <h3>{title}</h3>
-              <p>{createdAt && createdAt.toDate().toDateString()}</p>
-              <h5>{description}</h5>
-
-              <div className="d-flex flex-row-reverse">
-                {user && <LikeArticle id={id} likes={likes} />}
-                <div className="pe-2">
-                  <p>{likes && likes.length} likes</p>
-                </div>
-                {comments && comments.length > 0 && (
-                  <div className="pe-2">
-                    <p>{comments.length} comments</p>
-                  </div>
+              <div className="col-6 d-flex justify-content-end">
+                {user && user.uid === userId && (
+                  <DeleteArticle id={id} imageUrl={imageUrl} />
                 )}
               </div>
             </div>
+            <h3>{title}</h3>
+            <p>{createdAt && createdAt.toDate().toDateString()}</p>
+            <h5>{description}</h5>
+  
+            <div className="d-flex justify-content-end align-items-center">
+              {user && <LikeArticle id={id} likes={likes} />}
+              <div className="pe-2">
+                <p>{likes && likes.length} likes</p>
+              </div>
+              {comments && comments.length > 0 && (
+                <div className="pe-2">
+                  <p>{comments.length} comments</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      )
-    )
-  )}
-</div>
-
+      </div>
+    ))}
+  </div>
+  
   );
 }

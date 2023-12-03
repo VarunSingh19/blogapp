@@ -5,30 +5,21 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Article from "./components/Article";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="container">
       <Router>
+          <Navbar />
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/article/:id" element={<Article />} />
-          <Route
-            path="/"
-            element={
-              <div className="row mt-5">
-                <div className="col-md-8 order-md-1 order-2">
-                  <Articles />
-                </div>
-                <div className="col-md-4 order-md-2 order-1">
-                  <AddArticle />
-                </div>
-              </div>
-            }
-          />
+          <Route path="/addarticle" element={<AddArticle />} />
+          <Route path="/" element={<Articles />} />
         </Routes>
-        <Navbar />
+        <Footer/>
       </Router>
     </div>
   );

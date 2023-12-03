@@ -17,18 +17,25 @@ export default function Article() {
       setArticle({ ...snapshot.data(), id: snapshot.id });
     });
   }, []);
+
   return (
-    <div className="container border bg-light" style={{ marginTop: 70 }}>
+    <>
+      <br />
+      <br />
+      <br />
+    
+      
+    <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
       {article && (
         <div className="row">
-          <div className="col-3">
+          <div className="col-10 col-md-6">
             <img
               src={article.imageUrl}
               alt={article.title}
-              style={{ width: "100%", padding: 10 }}
-            />
+              className="img-fluid"
+              />
           </div>
-          <div className="col-9 mt-3">
+          <div className="col-10 col-md-6 mt-3">
             <h2>{article.title}</h2>
             <h5>Author: {article.createdBy}</h5>
             <div> Posted on: {article.createdAt.toDate().toDateString()}</div>
@@ -47,5 +54,6 @@ export default function Article() {
         </div>
       )}
     </div>
+      </>
   );
 }
