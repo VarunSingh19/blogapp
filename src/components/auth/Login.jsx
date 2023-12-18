@@ -21,9 +21,8 @@ export default function Login() {
     <>
       <br />
       <br />
-      <br />
-      <br />
-
+     
+    <div style={{height:'90vh'}}>
       <div
         className="border p-3 bg-light mx-auto shadow "
         style={{ maxWidth: 400, marginTop: 60 ,borderRadius:'10px'}}
@@ -63,7 +62,8 @@ export default function Login() {
           Login
           </button>
           </div>
-      </div>
+        </div>
+        </div>
     </>
   );
 }

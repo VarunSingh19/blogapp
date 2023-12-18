@@ -22,10 +22,6 @@ export default function Article() {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br/>
     <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
       {article && (
         <div className="row">

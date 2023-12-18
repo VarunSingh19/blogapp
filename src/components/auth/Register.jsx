@@ -23,9 +23,9 @@ export default function Register() {
     <>
       <br />
       <br />
-      <br />
-      
-    <div className="border p-3 bg-light shadow" style={{ marginTop: 70,borderRadius:'10px' }}>
+    
+      <div style={{height:'90vh'}}>
+    <div className="border p-3 bg-light shadow mx-auto" style={{ marginTop: 70,borderRadius:'10px',maxWidth: 400 }}>
       <div className="text-center">
           <h1>Register</h1>
           </div>
@@ -70,7 +70,8 @@ export default function Register() {
         Register
           </button>
           </div>
-    </div>
+        </div>
+        </div>
           </>
   );
 }
