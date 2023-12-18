@@ -83,18 +83,13 @@ export default function AddArticle() {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-      
     <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
-    <div className="card p-4" style={{ maxWidth: "500px" }}>
+    <div className="card p-4 shadow text-center" style={{ maxWidth: "500px" }}>
       {!user ? (
         <>
-          <h2 className="mb-4">Login to Create an Article</h2>
+          <h2 className="mb-4">Login to Create an Post</h2>
           <Link to="/signin" className="btn btn-primary mb-3">
-            Sign In
+            Log in
           </Link>
           <p className="text-muted">
             Don't have an account?{" "}

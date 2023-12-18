@@ -1,13 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./../firebaseConfig";
 import { signOut } from "firebase/auth";
-import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [user] = useAuthState(auth);
   const [randomProfileImage, setRandomProfileImage] = useState(null);
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
   useEffect(() => {
     const fetchRandomUser = async () => {
@@ -28,6 +30,7 @@ export default function Navbar() {
     // Fetch random user data when the component mounts
     fetchRandomUser();
   }, []);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div className="container ">
@@ -38,19 +41,48 @@ export default function Navbar() {
             height={30}
             alt="logo"
             className="ms-5"
-          /> <strong>RandomPosts</strong>
+          />
+          <strong>RandomPosts</strong>
         </Link>
-        <div className="navbar-collapse" id="navbarNav">
+
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded={!isNavCollapsed ? true : false}
+          aria-label="Toggle navigation"
+          onClick={handleNavCollapse}
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          className={`${isNavCollapsed ? "collapse" : ""} navbar-collapse mx-auto`}
+          id="navbarNav"
+        >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Articles
-              </Link>
+              <NavLink
+                className="nav-link"
+                activeClassName="active-link"
+                exact
+                to="/"
+              >
+                All Posts
+              </NavLink>
+              
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/addarticle">
-                Add Articles
-              </Link>
+              <NavLink
+                className="nav-link"
+                activeClassName="active-link"
+                to="/addarticle"
+              >
+                Add a new Post
+              </NavLink>
+              
             </li>
           </ul>
 
@@ -71,6 +103,7 @@ export default function Navbar() {
                 <button
                   className="btn btn-danger btn-sm"
                   onClick={() => {
+                    alert("Are you sure, you want to log out?")
                     signOut(auth);
                   }}
                 >

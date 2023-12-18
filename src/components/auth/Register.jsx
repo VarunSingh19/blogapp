@@ -25,14 +25,16 @@ export default function Register() {
       <br />
       <br />
       
-    <div className="border p-3 bg-light " style={{ marginTop: 70 }}>
-      <h1>Register</h1>
+    <div className="border p-3 bg-light shadow" style={{ marginTop: 70,borderRadius:'10px' }}>
+      <div className="text-center">
+          <h1>Register</h1>
+          </div>
       <div className="form-group">
-        <label>Name</label>
+        <label>Username</label>
         <input
           type="text"
           className="form-control"
-          placeholder="Enter your name"
+          placeholder="Enter Username"
           onChange={(e) => {
             setName(e.target.value);
           }}
@@ -43,7 +45,7 @@ export default function Register() {
         <input
           type="email"
           className="form-control"
-          placeholder="Enter your email"
+          placeholder="Enter Email"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -55,16 +57,19 @@ export default function Register() {
         <input
           type="password"
           className="form-control"
-          placeholder="Password"
+          placeholder="Enter Password"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
           />
       </div>
-      <br />
-      <button className="btn btn-primary" onClick={handleSignup}>
+        <br />
+        <div className="text-center">
+          <button className="btn btn-primary" style={{width:'100%'}} 
+            onClick={handleSignup}>
         Register
-      </button>
+          </button>
+          </div>
     </div>
           </>
   );

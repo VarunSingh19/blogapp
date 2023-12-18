@@ -5,10 +5,30 @@ import DeleteArticle from "./DeleteArticle";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LikeArticle from "./LikeArticle";
 import { Link } from "react-router-dom";
+import { Card, Row, Col } from 'react-bootstrap';
+import { FaThumbsUp, FaComment } from 'react-icons/fa';
+import '../App.css';
+
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [user] = useAuthState(auth);
+
+  const truncateDescription = (id, description, maxLength) => {
+    if (description.length > maxLength) {
+      const truncatedText = `${description.slice(0, maxLength)}... `;
+      return (
+        <>
+          {truncatedText}
+          <Link to={`/article/${id}`} className="read-more-link">
+            Read more
+          </Link>
+        </>
+      );
+    }
+    return description;
+  };
+
   useEffect(() => {
     const articleRef = collection(db, "Articles");
     const q = query(articleRef, orderBy("createdAt", "desc"));
@@ -22,59 +42,60 @@ export default function Articles() {
     });
   }, []);
   return (
+    <>
+      <br />
+      <br />
+      
     <div className="container mt-5">
-      
-      <br />
-      <br />
-      <br />
-      <br />
-      
-    {articles.map(({ id, imageUrl, createdBy, userId, title, createdAt, description, likes, comments }) => (
-      <div className="border p-4 mb-4 bg-light" key={id}>
-        <div className="row">
-          <div className="col-md-3 col-12 mb-3 mx-auto text-center">
+    <Row xs={1} md={2} lg={3} className="g-4">
+      {articles.map(({ id, imageUrl, createdBy, userId, title, createdAt, description, likes, comments }) => (
+        <Col key={id} className="mb-4 ">
+          <Card className="h-100 shadow">
             <Link to={`/article/${id}`}>
-              <img
+              <Card.Img
                 src={imageUrl}
                 alt="Article Cover"
                 className="img-fluid rounded"
-                style={{ maxWidth: '300px', maxHeight: '300px' }}
+                style={{ objectFit: 'cover', height: '200px' }}
               />
             </Link>
-          </div>
-          <div className="col-md-9 col-12">
-            <div className="row mb-3">
-              <div className="col-6">
-                {createdBy && (
-                  <span className="badge bg-primary">{createdBy}</span>
-                )}
-              </div>
-              <div className="col-6 d-flex justify-content-end">
-                {user && user.uid === userId && (
-                  <DeleteArticle id={id} imageUrl={imageUrl} />
-                )}
-              </div>
-            </div>
-            <h3>{title}</h3>
-            <p>{createdAt && createdAt.toDate().toDateString()}</p>
-            <h5>{description}</h5>
-  
-            <div className="d-flex justify-content-end align-items-center">
-              {user && <LikeArticle id={id} likes={likes} />}
-              <div className="pe-2">
-                <p>{likes && likes.length} likes</p>
-              </div>
-              {comments && comments.length > 0 && (
-                <div className="pe-2">
-                  <p>{comments.length} comments</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    ))}
+            <Card.Body>
+              <Card.Title>{title}</Card.Title>
+              <Card.Text style={{color:'gray'}}>{truncateDescription(id, description, 100)}</Card.Text>
+              <Row className="mb-3">
+                <Col xs={6} style={{fontFamily:'cursive'}}>
+                  {createdBy && <span>@{createdBy}</span>}
+                </Col>
+                <Col xs={6} className="d-flex justify-content-end">
+                  {user && user.uid === userId && <DeleteArticle id={id} imageUrl={imageUrl} />}
+                </Col>
+              </Row>
+              <Row className="mb-3 " style={{fontFamily:'sans-serif'}}>
+                <Col xs={12}>
+                  <p>{createdAt && new Date(createdAt.toDate()).toDateString()}</p>
+                </Col>
+              </Row>
+              <Row className="mb-3">
+                <Col xs={12}>
+                  <div className="d-flex justify-content-end align-items-center">
+                    {user && <LikeArticle id={id} likes={likes} />}
+                    <div className="pe-2">
+                      <p>{likes && likes.length} <FaThumbsUp /></p>
+                    </div>
+                    {comments && comments.length > 0 && (
+                      <div className="pe-2">
+                        <p>{comments.length} <FaComment /></p>
+                      </div>
+                    )}
+                  </div>
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
+        </Col>
+      ))}
+    </Row>
   </div>
-  
+      </>
   );
 }
