@@ -100,7 +100,7 @@ export default function AddArticle() {
         </>
       ) : (
         <>
-          <h2 className="mb-4">Create Article</h2>
+          <h2 className="mb-4">Create A Post</h2>
           <div className="mb-3">
             <label htmlFor="title" className="form-label">
               Title

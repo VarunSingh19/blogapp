@@ -22,18 +22,22 @@ export default function Article() {
 
   return (
     <>
+      <br />
+      <br />
+      <br />
+      
     <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
       {article && (
-        <div className="row">
-          <div className="col-10 col-md-6">
+         <section class="container mx-auto mt-8 p-4 bg-white shadow-lg rounded-md">
+          <div className="justify-content-center center d-flex">
             <img
               src={article.imageUrl}
               alt={article.title}
-                className="img-fluid"
-                style={{width:'300px',height:'300px'}}
+                className="img-fluid rounded-lg"
+                style={{width:'full',height:'450px'}}
               />
           </div>
-          <div className="col-10 col-md-6 mt-3">
+          <div className="">
             <h2>{article.title}</h2>
             <h5>Author: {article.createdBy}</h5>
             <div> Posted on: {article.createdAt.toDate().toDateString()}</div>
@@ -51,7 +55,7 @@ export default function Article() {
             </div>
             <Comment id={article.id} />
           </div>
-        </div>
+        </section>
       )}
     </div>
       </>

@@ -5,7 +5,7 @@ import DeleteArticle from "./DeleteArticle";
 import { useAuthState } from "react-firebase-hooks/auth";
 import LikeArticle from "./LikeArticle";
 import { Link } from "react-router-dom";
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card, Row, Col} from 'react-bootstrap';
 import { FaThumbsUp, FaComment } from 'react-icons/fa';
 import '../App.css';
 
@@ -45,8 +45,9 @@ export default function Articles() {
     <>
       <br />
       <br />
-      
-    <div className="container mt-5">
+      <>
+        <div id='featured-posts'
+        className="container mt-5">
     <Row xs={1} md={2} lg={3} className="g-4">
       {articles.map(({ id, imageUrl, createdBy, userId, title, createdAt, description, likes, comments }) => (
         <Col key={id} className="mb-4 ">
@@ -56,14 +57,14 @@ export default function Articles() {
                 src={imageUrl}
                 alt="Article Cover"
                 className="img-fluid rounded"
-                style={{ objectFit: 'cover', height: '200px' }}
+                style={{ objectFit: 'cover', height: '450px',width:'550px' }}
               />
             </Link>
             <Card.Body>
               <Card.Title>{title}</Card.Title>
               <Card.Text style={{color:'gray'}}>{truncateDescription(id, description, 100)}</Card.Text>
               <Row className="mb-3">
-                <Col xs={6} style={{fontFamily:'cursive'}}>
+                <Col xs={6} style={{color:'gray'}}>
                   {createdBy && <span>@{createdBy}</span>}
                 </Col>
                 <Col xs={6} className="d-flex justify-content-end">
@@ -96,6 +97,7 @@ export default function Articles() {
       ))}
     </Row>
   </div>
+                    </>
       </>
   );
 }

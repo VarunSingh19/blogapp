@@ -63,16 +63,25 @@ export default function Navbar() {
           id="navbarNav"
         >
           <ul className="navbar-nav">
-            <li className="nav-item">
+          <li className="nav-item">
               <NavLink
                 className="nav-link"
                 activeClassName="active-link"
                 exact
                 to="/"
               >
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                activeClassName="active-link"
+                exact
+                to="/AllArticles"
+              >
                 All Posts
               </NavLink>
-              
             </li>
             <li className="nav-item">
               <NavLink

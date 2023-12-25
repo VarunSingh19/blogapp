@@ -6,6 +6,8 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Article from "./components/Article";
 import Footer from "./components/Footer";
+import Home from "./components/Home";
+import TermsAndConditions from "./components/TermsCondition";
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
           <Route path="/signin" element={<Login />} />
           <Route path="/article/:id" element={<Article />} />
           <Route path="/addarticle" element={<AddArticle />} />
-          <Route path="/" element={<Articles />} />
+        <Route path="/Allarticles" element={<Articles />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/termsconditions" element={<TermsAndConditions/>} />
         </Routes>
         <Footer/>
       </Router>
